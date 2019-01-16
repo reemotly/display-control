@@ -17,7 +17,16 @@ win32.sleep = () => {
     var user32 = ffi.Library("user32", {
         SendMessageW: ["int", ["ulong", "uint", "long", "long"]]
     });
-    user32.SendMessageW(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, POWER_OFF);
+
+    return new Promise((resolve, reject), () => {
+        try {
+            user32.SendMessageW(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, POWER_OFF);
+            resolve();
+        } catch (e) {
+            reject(e)
+        }
+    });
+    
 }
 
 win32.wake = () => {
@@ -47,8 +56,15 @@ win32.wake = () => {
         'SendInput': ['int', ['uint', MouseInputPtr, 'int']]
     });
 
-    sendInput.SendInput(1, mouseInput.ref(), (os.arch() == 'x64' ? 40 : 28));
-    sendMessageW.SendMessageW(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, POWER_ON);
+    return new Promise((resolve, reject), () => {
+        try {
+            sendInput.SendInput(1, mouseInput.ref(), (os.arch() == 'x64' ? 40 : 28));
+            sendMessageW.SendMessageW(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, POWER_ON);
+            resolve();
+        } catch (e) {
+            reject(e);
+        }
+    })
 }
 
 win32.supported = () => {

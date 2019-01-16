@@ -6,11 +6,19 @@ const os = require("os");
 const linux = {};
 
 linux.sleep = () => {
-    exec('export DISPLAY=:0; xset dpms force suspend');
+    return new Promise((resolve, reject) => {
+        exec('export DISPLAY=:0; xset dpms force suspend', (err) => {
+            err ? reject(err) : resolve();
+        });
+    });
 }
 
 linux.wake = () => {
-    exec('export DISPLAY=:0; xset dpms force on');
+    return new Promise((resolve, reject) => {
+        exec('export DISPLAY=:0; xset dpms force on', (err) => {
+            err ? reject(err) : resolve();
+        });
+    });
 }
 
 linux.supported = () => {

@@ -1,6 +1,6 @@
 {
   "name": "display-control",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Sleep and wake the display",
   "main": "src/index.js",
   "files": [
@@ -22,17 +22,16 @@
     "windows",
     "win32"
   ],
-  "author": "SynergiTech (https://github.com/SynergiTech)",
-  "homepage": "https://github.com/SynergiTech/display-control",
+  "homepage": "https://github.com/reemotly/display-control",
   "bugs": {
-    "url": "https://github.com/SynergiTech/display-control/issues"
+    "url": "https://github.com/reemotly/display-control/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/SynergiTech/display-control.git"
+    "url": "https://github.com/reemotly/display-control.git"
   },
   "dependencies": {
-    "ffi": "^2.2.0",
+    "ffi": "^2.3.0",
     "ref": "^1.3.5"
   }
 }

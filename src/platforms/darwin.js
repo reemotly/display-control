@@ -6,18 +6,20 @@ const os = require("os");
 const darwin = {};
 
 darwin.sleep = () => {
-    execFile("pmset", ["displaysleepnow"], (error, stdout, stderr) => {
-        if (error) {
-            throw error;
-        }
-    });
+    return new Promise((resolve, reject) => {
+        execFile("pmset", ["displaysleepnow"], (error, stdout, stderr) => {
+            error ? reject(error) : resolve();
+        });
+    })
 }
-darwin.wake = () => {
-    execFile("caffeinate", ["-u"], (error, stdout, stderr) => {
-        if (error) {
-            throw error;
-        }
-    });
+
+/** Sleep with a default timeout of 5 minutes */
+darwin.wake = (timeoutInSeconds, cb) => {
+    return new Promise((resolve, reject) => {
+        execFile("caffeinate", ["-u", "-t", `${timeoutInSeconds ? timeoutInSeconds : "300"}`], (error, stdout, stderr) => {
+            error ? reject(error) : resolve();
+        });
+    })
 }
 
 darwin.supported = () => {
