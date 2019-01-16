@@ -5,8 +5,6 @@ This repo is a fork from https://github.com/SynergiTech/display-control intended
 
 Check the commits to view the changes!
 
-Uses promises!
-
 ## Installation
 ```
 
